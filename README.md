@@ -1,16 +1,47 @@
 # Credit-card-fraud-detection-Machine-Learning-
 Build a predictive model to recognize fraudulent credit card transactions so that customers are not charged for items that they did not purchase.
+Description:
 
-Data Understanding
-• The datasets contains transactions made by credit cards in September 2013 by European cardholders. • It has transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The dataset is highly unbalanced, the positive class (frauds) account for 0.172% of all transactions. • It contains only numerical input variables (V1, V2 … V28) which are the result of a PCA transformation. Features which have not been transformed with PCA are 'Time' and 'Amount'. • Feature 'Class' is the response variable and it takes value 1 in case of fraud and 0 otherwise.
+This project investigates machine learning techniques to build a predictive model that identifies fraudulent credit card transactions. It focuses on addressing class imbalance and optimizing model performance for high recall to minimize customer losses.
+Data:
+Description: 
+The dataset contains anonymized credit card transactions made by European cardholders in September 2013, spanning two days. It includes 284,807 transactions, with only 492 being fraudulent (0.172% class imbalance).
+Features:
+V1, V2, ..., V28: Numerical features resulting from PCA transformation.
+Time: Seconds elapsed since the first transaction (removed due to low significance).
+Amount: Transaction amount.
+Class: Target variable (1 for fraud, 0 otherwise).
+Source: [Link to the dataset source] (if publicly available)
+Data Preprocessing:
 
-Data Pre-Processing
-• Mostly the PCA transformed variables are Gaussian Normal distribution as per the Central limit theorem for a large number of data points. But histogram and distribution plots of variables show some skewness still left. Thus sklearn PowerTransformer is used to transform the variables into more normal distribution. • The scatter plot is then plotted to view the Time and Amount feature distribution for different classes. The plot shows Time feature as evenly distributed and thus of very little or no significance. Thus the Time variable is dropped. Test- Train Split • The data is then split into 70% Training and 30% test set using stratify=True, such that the Imbalance is preserved.
+Normalization: PowerTransformer from scikit-learn is used to normalize the PCA-transformed features towards a Gaussian distribution, improving model performance.
+Feature Selection: Time feature is removed due to its observed uniformity across classes and minimal impact on fraud detection.
+Train-Test Split:
 
-Model Building
-Imbalanced Training data • Build Models (Logistic Regression, KNN, SVM, Decision Trees and Random Forest) on the imbalanced training data. • Hyper parameters tuning is done using cross-validation (Stratified Kfold) and GridSearchCV. • Models using hyper parameters with best roc-auc score is selected.
-Random Oversampling • Build Models (Logistic Regression, KNN, SVM, Decision Trees and Random Forest) on the balanced training data using Random Oversampling. • Hyper parameters tuning is done using cross-validation (Stratified Kfold) and GridSearchCV. • Models using hyper parameters with best roc-auc score is selected.
-SMOTE • Build Models (Logistic Regression, KNN, SVM, Decision Trees and Random Forest) on the balanced training data using SMOTE. • Hyper parameters tuning is done using cross-validation (Stratified Kfold) and GridSearchCV. • Models using hyper parameters with best roc-auc score is selected.
-ADASYN • Build Models (Logistic Regression, KNN, SVM, Decision Trees and Random Forest) on the balanced training data using ADASYN. • Hyper parameters tuning is done using cross-validation (Stratified Kfold) and GridSearchCV. • Models using hyper parameters with best roc-auc score is selected.
-Model Selection
-• Select the oversampling method which shows the best result on a model. • Apply the best hyperparameter on the model. • Predict on the test dataset • Evaluate on roc-auc score, Precision and Recall. Model with good Recall is selected for the European bank as catching fraud is of paramount importance (which may include a few non-fraudulent cases).
+The dataset is stratified into 70% training and 30% testing sets using stratify=True to preserve the class imbalance for accurate evaluation.
+Model Building:
+
+Imbalanced Training:
+Models (Logistic Regression, KNN, SVM, Decision Trees, Random Forest) are trained on the original imbalanced dataset.
+Hyperparameter tuning is performed using stratified K-fold cross-validation and GridSearchCV to find the best configuration for each model.
+Model performance is evaluated using ROC-AUC score.
+Oversampling Techniques:
+To address class imbalance and potentially improve fraud detection accuracy, various oversampling techniques are employed:
+Random Oversampling: Duplicates instances from the minority class (frauds) randomly until class balance is achieved.
+SMOTE (Synthetic Minority Oversampling Technique): Creates synthetic samples for the minority class based on existing data points.
+ADASYN (Adaptive Synthetic Minority Oversampling Technique): Focuses on oversampling instances from the minority class that are more difficult to classify, potentially leading to better performance.
+Models are trained on the oversampled datasets using the same approach as with the imbalanced dataset.
+Model Selection:
+The best performing model-oversampling technique combination is chosen based on ROC-AUC score, prioritizing high recall to minimize missed fraud cases. Hyperparameters are fine-tuned further for optimal performance.
+Evaluation:
+
+The chosen model is evaluated on the unseen testing set using ROC-AUC score, precision, and recall.
+The focus is on achieving high recall to ensure minimal fraudulent transactions are missed, even if it means some non-fraudulent cases might be flagged (adjustable with a decision threshold).
+Results:
+
+This section will include the final performance metrics (ROC-AUC, precision, recall) of the chosen model, along with any visualizations or insights gained during the process.
+Future Work:
+
+Explore additional oversampling techniques or ensemble methods for potential performance improvements.
+Investigate feature engineering to create new features for better fraud detection.
+Experiment with online learning or real-time fraud detection systems that adapt to evolving fraud patterns.
