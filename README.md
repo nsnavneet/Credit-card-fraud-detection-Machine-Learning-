@@ -3,8 +3,6 @@
 ## Overview
 This project focuses on building a predictive model to identify fraudulent credit card transactions, aiming to minimize customer losses by detecting fraudulent activities accurately. Various machine learning techniques and oversampling methods are employed to address the class imbalance present in the dataset.
 
-## Data
-- **Source:** [Link to the dataset source]
 
 - **Description:** The dataset contains anonymized credit card transactions made by European cardholders in September 2013, spanning two days. It comprises 284,807 transactions, with only 492 being fraudulent (0.172% class imbalance).
 
